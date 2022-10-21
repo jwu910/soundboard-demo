@@ -31,7 +31,9 @@ Will need a form to collect information to push to buttons list
 
 
 */
-  const [buttons, setButtons] = useState([{ label: 'Hello!', color: 'blue' }]);
+  const [buttons, setButtons] = useState([
+    { label: 'Hello!', color: 'lightgreen' },
+  ]);
   const [newLabel, setNewLabel] = useState('');
   const [newColor, setNewColor] = useState('');
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
