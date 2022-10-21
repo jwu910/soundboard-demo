@@ -5,11 +5,13 @@ import '@fontsource/roboto/700.css';
 import './App.scss';
 
 import {
+  Box,
   Button,
   Card,
   Container,
   Divider,
   Paper,
+  Popover,
   TextField,
   Typography,
 } from '@mui/material';
@@ -33,10 +35,23 @@ Will need a form to collect information to push to buttons list
   const [newLabel, setNewLabel] = useState('');
   const [newColor, setNewColor] = useState('');
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   useEffect(() => {
     setIsSaveEnabled(newColor && newLabel);
   }, [newColor, newLabel]);
+
+  const handleColorPickerClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleColorChange = (color) => {
+    setNewColor(color);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   const handleAddNewButton = () => {
     // Need to add sound file still
@@ -47,7 +62,8 @@ Will need a form to collect information to push to buttons list
       setNewLabel('');
     }
   };
-
+  const isColorPickerOpen = Boolean(anchorEl);
+  const id = isColorPickerOpen ? 'simple-popover' : undefined;
 
   //TODO: add a button preview in the form
   return (
@@ -61,7 +77,31 @@ Will need a form to collect information to push to buttons list
             spacing={2}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
-            <CirclePicker onChange={(color) => setNewColor(color.hex)} />
+            <Button
+              id="colorButton"
+              sx={{ backgroundColor: newColor || '', color: '', minHeight: 56 }}
+              onClick={handleColorPickerClick}
+            >
+              Pick Color
+            </Button>
+            <Popover
+              id={id}
+              open={isColorPickerOpen}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+            >
+              <Box sx={{ p: 2 }}>
+                <CirclePicker
+                  styles={{ padding: 4 }}
+                  label="Color"
+                  onChange={(color) => handleColorChange(color.hex)}
+                />
+              </Box>
+            </Popover>
 
             <TextField
               flexItem
