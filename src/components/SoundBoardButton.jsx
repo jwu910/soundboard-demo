@@ -11,11 +11,8 @@ const SoundBoardButton = (props) => {
   const newRef = useRef();
 
   const handlePlayAudio = () => {
-    console.log('newRef :>> ', newRef.current);
     const button = document.getElementById(mediaBlobUrl);
     button && button.play();
-
-    // newRef.current.play();
   };
 
   const handleRecordToggle = () => {
@@ -26,13 +23,13 @@ const SoundBoardButton = (props) => {
     }
   };
 
-const getButtonLabel = (recordingStatus, label) => {
-  if (recordingStatus === 'recording') {
-    return 'Recording';
-  } else {
-    return label;
-  }
-}
+  const getButtonLabel = (recordingStatus, label) => {
+    if (recordingStatus === 'recording') {
+      return 'Recording';
+    } else {
+      return label;
+    }
+  };
 
   return (
     <>

@@ -21,16 +21,6 @@ import { CirclePicker } from 'react-color';
 import SoundBoardButton from './components/SoundBoardButton';
 
 function App() {
-  /* 
-Build a sound board application
-Students will be able to pick button color, button label, do a quick sound recording and save that
-sound file to the button
-These buttons probably will be a list of buttons that we can add to
-
-Will need a form to collect information to push to buttons list
-
-
-*/
   const [buttons, setButtons] = useState([
     {
       label: 'Hello!',
@@ -54,10 +44,12 @@ Will need a form to collect information to push to buttons list
 
   const handleButtonColorChange = (color) => {
     setNewButtonColor(color);
+    setAnchorEl(null);
   };
 
   const handleTextColorChange = (color) => {
     setNewTextColor(color);
+    setAnchorEl(null);
   };
 
   const handleClose = () => {
@@ -85,8 +77,8 @@ Will need a form to collect information to push to buttons list
   const id = isColorPickerOpen ? 'simple-popover' : undefined;
 
   //TODO: add a button preview in the form
-  //TODO: attach sound playback to buttons
   //TODO: persist data on refresh - probably local storage
+  //TODO: add icon to indicate we still need to record
   return (
     <Container className="App">
       <Paper sx={{ p: 5 }}>
@@ -98,6 +90,12 @@ Will need a form to collect information to push to buttons list
             spacing={2}
             sx={{ display: 'flex', alignItems: 'center' }}
           >
+            <TextField
+              label="Button Label"
+              value={newLabel}
+              onInput={(val) => setNewLabel(val.target.value)}
+            ></TextField>
+
             <Button
               id="colorButton"
               onClick={handleColorPickerClick}
@@ -137,12 +135,6 @@ Will need a form to collect information to push to buttons list
             >
               Text Color
             </Button>
-
-            <TextField
-              label="Button Label"
-              value={newLabel}
-              onInput={(val) => setNewLabel(val.target.value)}
-            ></TextField>
 
             <Button
               sx={{ flexGrow: 1, minHeight: 56 }}
