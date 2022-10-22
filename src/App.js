@@ -13,7 +13,7 @@ import {
   Paper,
   Popover,
   TextField,
-  Typography,
+  Typography
 } from '@mui/material';
 import { Stack } from '@mui/system';
 import { useEffect, useState } from 'react';
@@ -22,6 +22,26 @@ import SoundBoardButton from './components/SoundBoardButton';
 
 function App() {
   const [buttons, setButtons] = useState([
+    {
+      label: 'Hello!',
+      buttonColor: 'lightgreen',
+      textColor: 'black',
+    },
+    {
+      label: 'Hello!',
+      buttonColor: 'lightgreen',
+      textColor: 'black',
+    },
+    {
+      label: 'Hello!',
+      buttonColor: 'lightgreen',
+      textColor: 'black',
+    },
+    {
+      label: 'Hello!',
+      buttonColor: 'lightgreen',
+      textColor: 'black',
+    },
     {
       label: 'Hello!',
       buttonColor: 'lightgreen',
@@ -66,6 +86,8 @@ function App() {
           textColor: newTextColor,
         },
       ]);
+
+      // update local storage here
 
       setNewButtonColor('');
       setNewLabel('');
@@ -159,20 +181,26 @@ function App() {
 
         <Divider />
 
-        <Stack sx={{ mt: 2 }}>
+        <Stack
+          sx={{
+            mt: 2,
+            display: 'inline-flex',
+            flexWrap: 'wrap',
+            justifyContent: 'space-between',
+          }}
+          direction="row"
+          spacing={2}
+        >
           {buttons.length > 0 &&
             buttons.map((button, index) => {
               return (
-                <Stack key={index} sx={{ mb: 2 }} direction="row" spacing={4}>
-                  <Typography variant="h6">{index + 1}</Typography>
-
                   <SoundBoardButton
+                    key={index}
                     buttonColor={button.buttonColor}
                     textColor={button.textColor}
                     label={button.label}
                     media={button.media}
                   />
-                </Stack>
               );
             })}
         </Stack>

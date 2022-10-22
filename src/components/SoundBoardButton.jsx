@@ -1,11 +1,11 @@
-import { Button } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { useRef } from 'react';
 import { useReactMediaRecorder } from 'react-media-recorder';
 
 const SoundBoardButton = (props) => {
   const { label, buttonColor, textColor, ...otherProps } = props;
 
-  const { status, startRecording, stopRecording, mediaBlobUrl, clearBlobUrl } =
+  const { status, startRecording, stopRecording, mediaBlobUrl } =
     useReactMediaRecorder({ video: false });
 
   const newRef = useRef();
@@ -32,9 +32,9 @@ const SoundBoardButton = (props) => {
   };
 
   return (
-    <>
+    <Box>
       <Button
-        sx={{ backgroundColor: buttonColor, color: textColor }}
+        sx={{ backgroundColor: buttonColor, color: textColor}}
         variant="outlined"
         onClick={mediaBlobUrl ? handlePlayAudio : handleRecordToggle}
         {...otherProps}
@@ -43,13 +43,13 @@ const SoundBoardButton = (props) => {
       </Button>
       <audio
         ref={newRef}
-        style={{ visibility: 'hidden' }}
+        style={{ visibility: 'hidden', width: 0 }}
         id={mediaBlobUrl}
         src={mediaBlobUrl}
         controls
         type="audio/wav"
       />
-    </>
+    </Box>
   );
 };
 
