@@ -1,3 +1,4 @@
+import { PlayArrow, Headphones } from '@mui/icons-material';
 import { Box, Button } from '@mui/material';
 import { useRef } from 'react';
 import { useReactMediaRecorder } from 'react-media-recorder';
@@ -34,12 +35,13 @@ const SoundBoardButton = (props) => {
   return (
     <Box>
       <Button
-        sx={{ backgroundColor: buttonColor, color: textColor}}
+        sx={{ backgroundColor: buttonColor, color: textColor }}
         variant="outlined"
         onClick={mediaBlobUrl ? handlePlayAudio : handleRecordToggle}
         {...otherProps}
       >
         {getButtonLabel(status, label)}
+        {!mediaBlobUrl ? <Headphones /> : <PlayArrow />}
       </Button>
       <audio
         ref={newRef}
