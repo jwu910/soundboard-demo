@@ -18,7 +18,6 @@ import {
 import { Stack } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { CirclePicker } from 'react-color';
-import { useReactMediaRecorder } from 'react-media-recorder';
 import SoundBoardButton from './components/SoundBoardButton';
 
 function App() {
@@ -33,30 +32,32 @@ Will need a form to collect information to push to buttons list
 
 */
   const [buttons, setButtons] = useState([
-    { label: 'Hello!', color: 'lightgreen' },
+    {
+      label: 'Hello!',
+      buttonColor: 'lightgreen',
+      textColor: 'black',
+    },
   ]);
   const [newLabel, setNewLabel] = useState('');
-  const [newColor, setNewColor] = useState('');
+  const [newButtonColor, setNewButtonColor] = useState('');
+  const [newTextColor, setNewTextColor] = useState('');
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [previewId, setPreviewId] = useState('');
-
-  const { status, startRecording, stopRecording, mediaBlobUrl, clearBlobUrl } =
-    useReactMediaRecorder({ video: false });
 
   useEffect(() => {
-    const newPreviewId = `${newColor}-${newLabel}`;
-
-    setIsSaveEnabled(newColor && newLabel);
-    setPreviewId(newPreviewId);
-  }, [newColor, newLabel]);
+    setIsSaveEnabled(newButtonColor && newLabel && newTextColor);
+  }, [newButtonColor, newLabel, newTextColor]);
 
   const handleColorPickerClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleColorChange = (color) => {
-    setNewColor(color);
+  const handleButtonColorChange = (color) => {
+    setNewButtonColor(color);
+  };
+
+  const handleTextColorChange = (color) => {
+    setNewTextColor(color);
   };
 
   const handleClose = () => {
@@ -64,39 +65,28 @@ Will need a form to collect information to push to buttons list
   };
 
   const handleAddNewButton = () => {
-    // Need to add sound file still
-    if (newLabel && newColor) {
+    if (newLabel && newButtonColor && newTextColor) {
       setButtons([
         ...buttons,
-        { label: newLabel, color: newColor, media: mediaBlobUrl },
+        {
+          label: newLabel,
+          buttonColor: newButtonColor,
+          textColor: newTextColor,
+        },
       ]);
 
-      setNewColor('');
+      setNewButtonColor('');
       setNewLabel('');
-      clearBlobUrl();
+      setNewTextColor('');
     }
-  };
-
-  const handleRecordClick = () => {
-    if (status === 'idle') {
-      startRecording();
-    } else {
-      stopRecording();
-    }
-  };
-
-  const handlePlayPreview = () => {
-    const elementId = document.getElementById(`${newColor}-${newLabel}`);
-
-    elementId.play();
   };
 
   const isColorPickerOpen = Boolean(anchorEl);
   const id = isColorPickerOpen ? 'simple-popover' : undefined;
 
-  // save buttons to local storage on save to persist new buttons for the day
-
   //TODO: add a button preview in the form
+  //TODO: attach sound playback to buttons
+  //TODO: persist data on refresh - probably local storage
   return (
     <Container className="App">
       <Paper sx={{ p: 5 }}>
@@ -114,7 +104,7 @@ Will need a form to collect information to push to buttons list
               sx={{ minHeight: 56 }}
               variant="outlined"
             >
-              Pick Color
+              Button Color
             </Button>
             <Popover
               id={id}
@@ -130,10 +120,23 @@ Will need a form to collect information to push to buttons list
                 <CirclePicker
                   styles={{ padding: 4 }}
                   label="Color"
-                  onChange={(color) => handleColorChange(color.hex)}
+                  onChange={(color) =>
+                    anchorEl.innerText === 'BUTTON COLOR'
+                      ? handleButtonColorChange(color.hex)
+                      : handleTextColorChange(color.hex)
+                  }
                 />
               </Box>
             </Popover>
+
+            <Button
+              id="colorText"
+              onClick={handleColorPickerClick}
+              sx={{ minHeight: 56 }}
+              variant="outlined"
+            >
+              Text Color
+            </Button>
 
             <TextField
               label="Button Label"
@@ -141,21 +144,6 @@ Will need a form to collect information to push to buttons list
               onInput={(val) => setNewLabel(val.target.value)}
             ></TextField>
 
-            <Button
-              sx={{ minHeight: 56 }}
-              onClick={handleRecordClick}
-              variant="outlined"
-            >
-              Record a Sound File
-            </Button>
-
-            <span
-              sx={{ minHeight: 56 }}
-              variant="outlined"
-              disabled={!mediaBlobUrl}
-            >
-              {status}
-            </span>
             <Button
               sx={{ flexGrow: 1, minHeight: 56 }}
               onClick={handleAddNewButton}
@@ -169,17 +157,10 @@ Will need a form to collect information to push to buttons list
           <Stack sx={{ mt: 4 }}>
             This is what your button will look like!
             <SoundBoardButton
-              sx={{ d: 'flex' }}
-              color={newColor}
+              buttonColor={newButtonColor}
+              textColor={newTextColor}
               label={newLabel}
-              onClick={handlePlayPreview}
-            />
-            <audio
-              style={{ visibility: 'hidden' }}
-              id={`${newColor}-${newLabel}`}
-              src={mediaBlobUrl}
-              controls
-              type="audio/wav"
+              onClick={null}
             />
           </Stack>
         </Card>
@@ -188,17 +169,20 @@ Will need a form to collect information to push to buttons list
 
         <Stack sx={{ mt: 2 }}>
           {buttons.length > 0 &&
-            buttons.map((button, index) => (
-              <Stack key={index} sx={{ mb: 2 }} direction="row" spacing={4}>
-                <Typography variant="h6">{index + 1}</Typography>
+            buttons.map((button, index) => {
+              return (
+                <Stack key={index} sx={{ mb: 2 }} direction="row" spacing={4}>
+                  <Typography variant="h6">{index + 1}</Typography>
 
-                <SoundBoardButton
-                  sx={{ my: 2 }}
-                  color={button.color}
-                  label={button.label}
-                />
-              </Stack>
-            ))}
+                  <SoundBoardButton
+                    buttonColor={button.buttonColor}
+                    textColor={button.textColor}
+                    label={button.label}
+                    media={button.media}
+                  />
+                </Stack>
+              );
+            })}
         </Stack>
       </Paper>
     </Container>
