@@ -13,7 +13,7 @@ import {
   Paper,
   Popover,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 import { Stack } from '@mui/system';
 import { useEffect, useState } from 'react';
@@ -104,7 +104,7 @@ function App() {
   return (
     <Container className="App">
       <Paper sx={{ p: 5 }}>
-        <Typography variant="h1">Sound Board Demo</Typography>
+        <Typography variant="h2">Sound Board Demo</Typography>
 
         <Card sx={{ p: 2, mb: 5 }}>
           <Stack
@@ -173,14 +173,17 @@ function App() {
             <SoundBoardButton
               buttonColor={newButtonColor}
               textColor={newTextColor}
-              label={newLabel}
+              label={newLabel || "Your New Button"}
               onClick={null}
             />
           </Stack>
         </Card>
 
         <Divider />
-
+        <Typography variant="h5">
+          {' '}
+          Press your button to record! Then press it again to play!{' '}
+        </Typography>
         <Stack
           sx={{
             mt: 2,
@@ -194,13 +197,13 @@ function App() {
           {buttons.length > 0 &&
             buttons.map((button, index) => {
               return (
-                  <SoundBoardButton
-                    key={index}
-                    buttonColor={button.buttonColor}
-                    textColor={button.textColor}
-                    label={button.label}
-                    media={button.media}
-                  />
+                <SoundBoardButton
+                  key={index}
+                  buttonColor={button.buttonColor}
+                  textColor={button.textColor}
+                  label={button.label}
+                  media={button.media}
+                />
               );
             })}
         </Stack>
