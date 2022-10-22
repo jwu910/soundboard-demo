@@ -24,27 +24,27 @@ function App() {
   const [buttons, setButtons] = useState([
     {
       label: 'Hello!',
-      buttonColor: 'lightgreen',
+      buttonColor: 'green',
       textColor: 'black',
     },
     {
       label: 'Hello!',
-      buttonColor: 'lightgreen',
+      buttonColor: 'red',
       textColor: 'black',
     },
     {
       label: 'Hello!',
-      buttonColor: 'lightgreen',
+      buttonColor: 'orange',
       textColor: 'black',
     },
     {
       label: 'Hello!',
-      buttonColor: 'lightgreen',
+      buttonColor: 'yellow',
       textColor: 'black',
     },
     {
       label: 'Hello!',
-      buttonColor: 'lightgreen',
+      buttonColor: 'white',
       textColor: 'black',
     },
   ]);
