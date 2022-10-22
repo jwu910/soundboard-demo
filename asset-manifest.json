@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/soundboard-demo/static/css/main.035d2a5a.css",
-    "main.js": "/soundboard-demo/static/js/main.1b5ab227.js",
+    "main.js": "/soundboard-demo/static/js/main.79c4b4f9.js",
     "static/js/787.70cbb9df.chunk.js": "/soundboard-demo/static/js/787.70cbb9df.chunk.js",
     "static/media/roboto-all-500-normal.woff": "/soundboard-demo/static/media/roboto-all-500-normal.0ab669b7a0d19b178f57.woff",
     "static/media/roboto-all-700-normal.woff": "/soundboard-demo/static/media/roboto-all-700-normal.a457fde362a540fcadff.woff",
@@ -37,11 +37,11 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/soundboard-demo/static/media/roboto-greek-ext-700-normal.bd9854c751441ccc1a70.woff2",
     "index.html": "/soundboard-demo/index.html",
     "main.035d2a5a.css.map": "/soundboard-demo/static/css/main.035d2a5a.css.map",
-    "main.1b5ab227.js.map": "/soundboard-demo/static/js/main.1b5ab227.js.map",
+    "main.79c4b4f9.js.map": "/soundboard-demo/static/js/main.79c4b4f9.js.map",
     "787.70cbb9df.chunk.js.map": "/soundboard-demo/static/js/787.70cbb9df.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.035d2a5a.css",
-    "static/js/main.1b5ab227.js"
+    "static/js/main.79c4b4f9.js"
   ]
 }
