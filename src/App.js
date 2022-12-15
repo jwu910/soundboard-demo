@@ -23,27 +23,27 @@ import SoundBoardButton from './components/SoundBoardButton';
 function App() {
   const [buttons, setButtons] = useState([
     {
-      label: 'Hello!',
+      label: 'Engineer',
       buttonColor: 'green',
       textColor: 'black',
     },
     {
-      label: 'Hello!',
+      label: 'Scientist',
       buttonColor: 'red',
       textColor: 'black',
     },
     {
-      label: 'Hello!',
+      label: 'Doctor',
       buttonColor: 'orange',
       textColor: 'black',
     },
     {
-      label: 'Hello!',
+      label: 'Pharmacist',
       buttonColor: 'yellow',
       textColor: 'black',
     },
     {
-      label: 'Hello!',
+      label: 'Software Engineer',
       buttonColor: 'white',
       textColor: 'black',
     },
@@ -104,7 +104,7 @@ function App() {
   return (
     <Container className="App">
       <Paper sx={{ p: 5 }}>
-        <Typography variant="h2">Sound Board Demo</Typography>
+        <Typography variant="h2">Maywood 2022</Typography>
 
         <Card sx={{ p: 2, mb: 5 }}>
           <Stack
@@ -113,7 +113,7 @@ function App() {
             sx={{ display: 'flex', alignItems: 'center' }}
           >
             <TextField
-              label="Button Label"
+              label="Dream Job"
               value={newLabel}
               onInput={(val) => setNewLabel(val.target.value)}
             ></TextField>
@@ -173,17 +173,23 @@ function App() {
             <SoundBoardButton
               buttonColor={newButtonColor}
               textColor={newTextColor}
-              label={newLabel || "Your New Button"}
+              label={newLabel || 'Your New Button'}
               onClick={null}
             />
           </Stack>
         </Card>
 
         <Divider />
-        <Typography variant="h5">
+        {/* <Typography variant="h5">
           {' '}
           Press your button to record! Then press it again to play!{' '}
+        </Typography> */}
+
+        <Typography variant="h5">
+          {' '}
+          "When I grow up, I want to be (a/an) _______________"
         </Typography>
+
         <Stack
           sx={{
             mt: 2,

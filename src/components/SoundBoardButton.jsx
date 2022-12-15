@@ -1,4 +1,4 @@
-import { PlayArrow, Headphones } from '@mui/icons-material';
+import { Headphones, PlayArrow } from '@mui/icons-material';
 import { Box, Button } from '@mui/material';
 import { useRef } from 'react';
 import { useReactMediaRecorder } from 'react-media-recorder';
